@@ -14,7 +14,7 @@
 
 ## Prerequisites
 
-여행 데이터를 スクレイピング하려면 Python과 Selenium, Requests 또는 AIOHTTP 모듈 중 하나가 필요합니다. Selenium을 사용하면 Google Travel에서 호텔 정보를 직접 スクレイピング합니다. Requests와 AIOHTTP를 사용하면 Bright Data의 [Booking.com API](https://brightdata.co.kr/products/web-scraper/booking)를 사용하게 됩니다.
+여행 데이터를 스크레이핑하려면 Python과 Selenium, Requests 또는 AIOHTTP 모듈 중 하나가 필요합니다. Selenium을 사용하면 Google Travel에서 호텔 정보를 직접 스크레이핑합니다. Requests와 AIOHTTP를 사용하면 Bright Data의 [Booking.com API](https://brightdata.co.kr/products/web-scraper/booking)를 사용하게 됩니다.
 
 Selenium을 사용하는 경우 [webdriver](https://googlechromelabs.github.io/chrome-for-testing/)가 설치되어 있는지 확인합니다. Selenium이 익숙하지 않다면, 빠르게 익히기 위해 [이 가이드](https://brightdata.co.kr/blog/how-tos/using-selenium-for-web-scraping)를 확인해 보시기 바랍니다.
 
@@ -151,13 +151,13 @@ if __name__ == "__main__":
 1. 먼저 `ChromeOptions`의 인스턴스를 생성합니다. 이를 사용하여 `--headless` 및 `--window-size=1920,1080` 인자를 추가합니다.
 
 > **Note**\
-> 커스텀 window size가 없으면 결과가 제대로 로드되지 않으며, 동일한 결과를 반복해서 スクレイピング하게 됩니다.
+> 커스텀 window size가 없으면 결과가 제대로 로드되지 않으며, 동일한 결과를 반복해서 스크레이핑하게 됩니다.
 
 2. 브라우저를 실행할 때 키워드 인자 `options=OPTIONS`를 사용합니다. 이를 통해 커스텀 옵션이 적용된 Chrome이 실행됩니다.
 
 3. `ActionChains(driver)`는 `ActionChains` 인스턴스를 제공합니다. 이는 이후 스크립트에서 커서를 `Next` 버튼으로 이동한 다음 클릭하는 데 사용합니다.
 
-4. 런타임을 포함하기 위해 `while` 루프를 사용합니다. スクレイピング이 완료되면 이 루프를 종료합니다.
+4. 런타임을 포함하기 위해 `while` 루프를 사용합니다. 스크레이핑이 완료되면 이 루프를 종료합니다.
 
 5. `hotel_links = driver.find_elements(By.CSS_SELECTOR, "c-wiz > div > a")`는 페이지의 모든 호텔 링크를 제공합니다. xpath를 사용해 부모 요소를 찾습니다: `hotel_card = hotel_link.find_element(By.XPATH, "..")`.
 
@@ -167,8 +167,8 @@ if __name__ == "__main__":
     - 가격을 찾을 때 카드에 `DEAL`, `GREAT PRICE`와 같은 추가 요소가 포함되는 경우가 있습니다. 항상 올바른 가격을 가져오기 위해 `span` 요소를 배열로 추출합니다. 배열에 이러한 단어가 포함되면 첫 번째 요소(`price_holder[0].text`)가 아니라 두 번째 요소(`price_holder[1].text`)를 사용합니다.
     - 평점을 찾을 때도 `find_elements()` 메서드를 사용합니다. 평점이 없으면 기본값으로 `n/a`를 부여합니다.
     - `hotel_card.find_elements(By.CSS_SELECTOR, "li")`는 편의시설 요소들을 제공합니다. 각 요소의 `text` 속성을 사용해 추출합니다.
-7. 원하는 모든 페이지를 スクレイピング할 때까지 이 루프를 계속합니다. 데이터를 확보하면 `done`을 `True`로 설정하고 루프를 종료합니다.
-8. 브라우저를 닫고 `json.dump()`를 사용하여 スクレイピング한 모든 데이터를 JSON 파일로 저장합니다.
+7. 원하는 모든 페이지를 스크레이핑할 때까지 이 루프를 계속합니다. 데이터를 확보하면 `done`을 `True`로 설정하고 루프를 종료합니다.
+8. 브라우저를 닫고 `json.dump()`를 사용하여 스크레이핑한 모든 데이터를 JSON 파일로 저장합니다.
 
 ## Extracting the Data With Bright Data’s Travel API
 
@@ -345,7 +345,7 @@ Snapshot saved to snapshot-data.json
 
 ### AIOHTTP
 
-[AIOHTTP](https://brightdata.co.kr/blog/web-data/speed-up-web-scraping) 라이브러리를 사용하면 여러 データセット을 동시에 trigger, poll, download할 수 있으므로 이 프로세스가 더 빨라질 수 있습니다. 아래 코드는 위의 Requests 예제의 개념을 기반으로 하되, `aiohttp.ClientSession()`을 사용하여 여러 요청을 비동기적으로 수행합니다.
+[AIOHTTP](https://brightdata.co.kr/blog/web-data/speed-up-web-scraping) 라이브러리를 사용하면 여러 데이터셋을 동시에 trigger, poll, download할 수 있으므로 이 프로세스가 더 빨라질 수 있습니다. 아래 코드는 위의 Requests 예제의 개념을 기반으로 하되, `aiohttp.ClientSession()`을 사용하여 여러 요청을 비동기적으로 수행합니다.
 
 ```python
 import aiohttp
@@ -473,7 +473,7 @@ Snapshot saved to snapshot-key_west.json
 
 ## Bright Data’s Alternative Solutions
 
-[Web Scraper APIs](https://brightdata.co.kr/products/web-scraper) 외에도, Bright Data는 다양한 요구를 충족하도록 맞춤 설계된 즉시 사용 가능한 データセット을 제공합니다. 가장 수요가 높은 여행 データセット은 다음과 같습니다:
+[Web Scraper APIs](https://brightdata.co.kr/products/web-scraper) 외에도, Bright Data는 다양한 요구를 충족하도록 맞춤 설계된 즉시 사용 가능한 데이터셋을 제공합니다. 가장 수요가 높은 여행 데이터셋은 다음과 같습니다:
 
 - [Hotel Datasets](https://brightdata.co.kr/products/datasets/travel/hotels)
 - [Expedia Datasets](https://brightdata.co.kr/products/datasets/travel/expedia)
@@ -481,4 +481,4 @@ Snapshot saved to snapshot-key_west.json
 - [Booking.com Datasets](https://brightdata.co.kr/products/datasets/booking)
 - [TripAdvisor Datasets](https://brightdata.co.kr/products/datasets/tripadvisor)
 
-완전 관리형 또는 자체 관리형 커스텀 データセット 중에서 선택할 수 있으며, 이를 통해 어떤 공개 웹사이트에서든 데이터를 추출하고 정확한 사양에 맞게 커스터마이징할 수 있습니다.
+완전 관리형 또는 자체 관리형 커스텀 데이터셋 중에서 선택할 수 있으며, 이를 통해 어떤 공개 웹사이트에서든 데이터를 추출하고 정확한 사양에 맞게 커스터마이징할 수 있습니다.
